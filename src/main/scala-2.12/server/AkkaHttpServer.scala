@@ -6,10 +6,11 @@ import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
 import com.typesafe.config.ConfigFactory
 
+
 /**
   * Created by rois on 10/02/2017.
   */
-object AkkaHttpServer extends App with Controller {
+object AkkaHttpServer extends App with Router {
     
     override implicit val system = ActorSystem()
     override implicit val executor = system.dispatcher
@@ -19,4 +20,7 @@ object AkkaHttpServer extends App with Controller {
     override val logger = Logging(system, getClass)
     
     Http().bindAndHandle(routes, config.getString("http.interface"), config.getInt("http.port"))
+    
+    logger.info(s"server is up and listening to port ${config.getInt("http.port")}")
+    
 }

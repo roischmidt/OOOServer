@@ -15,7 +15,10 @@ libraryDependencies ++= {
            "com.typesafe.akka" %% "akka-http" % akkaHttpV,
            "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpV,
            "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpV,
-           "org.scalatest"     %% "scalatest" % scalaTestV % "test"
+           "org.scalatest"     %% "scalatest" % scalaTestV % "test",
+           "com.typesafe.play" % "play-json_2.12" % "2.6.0-M1",
+           "ch.qos.logback" % "logback-classic" % "1.1.10",
+           "com.jason-goodwin" %% "authentikat-jwt" % "0.4.5"
        )
 }
 

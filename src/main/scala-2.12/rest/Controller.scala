@@ -11,23 +11,20 @@ import scala.concurrent.Future
   */
 object Controller {
     
-    private def process[REQ,RES](service : Service[REQ,RES] ,json: String) : Future[HttpResponse] = {
+    private def process[REQ,RES](service : Service[REQ,RES] ,json: String) : Future[String] = {
         service.fromJson(json).map{
             request => service.handle(request).map{
-                response => toHttpResponse(service.toJson(response))
+                response => service.toJson(response)
             }.recoverWith{
                 case e: Exception =>
-                    Future.successful(new Error(500,s"request failed with error ${e.getMessage}").asHttpResponse)
+                    Future.successful(Error.fmtJson.writes(Error(s"request failed with error ${e.getMessage}")).toString)
             }
-        }.getOrElse(Future.successful(new Error(StatusCodes.BadRequest,"").asHttpResponse))
+        }.getOrElse(Future.successful(Error.fmtJson.writes(Error("")).toString))
     }
-    
-    def toHttpResponse(response: String) : HttpResponse =
-        HttpResponse(200,entity = HttpEntity(ContentType(MediaTypes.`application/json`),response))
     
     def handleHealthCheck: String = "alive"
     
-    def handleLogin(request: String): Future[HttpResponse] =
+    def handleLogin(request: String): Future[String] =
         process(LoginService,request)
     
     

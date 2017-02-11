@@ -1,12 +1,14 @@
 package api
 
-import akka.http.scaladsl.model.{HttpEntity, HttpResponse, StatusCode}
+import play.api.libs.json.Json
 
 /**
   * Created by rois on 10/02/2017.
   */
-class Error(statusCode: StatusCode,reason: String) {
-    
-    def asHttpResponse : HttpResponse = HttpResponse(statusCode,entity = HttpEntity(reason))
+case class Error(
+    reason: String
+)
 
+object Error{
+    implicit val fmtJson = Json.format[Error]
 }

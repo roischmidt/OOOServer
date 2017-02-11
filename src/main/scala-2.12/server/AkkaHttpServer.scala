@@ -5,6 +5,7 @@ import akka.event.Logging
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
 import com.typesafe.config.ConfigFactory
+import utils.RedisClientImpl
 
 
 /**
@@ -22,5 +23,6 @@ object AkkaHttpServer extends App with Router {
     Http().bindAndHandle(routes, config.getString("http.interface"), config.getInt("http.port"))
     
     logger.info(s"server is up and listening to port ${config.getInt("http.port")}")
+    RedisClientImpl.init
     
 }

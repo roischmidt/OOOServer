@@ -14,7 +14,7 @@ object LoginService extends Service[LoginRequest, LoginResponse] {
     
     val logger = LoggerFactory.getLogger(getClass)
     
-    override def handle(request: LoginRequest): Future[LoginResponse] = {
+     override def handle(request: LoginRequest): Future[LoginResponse] = {
         isNickNameAlreadyExists(request.nickName) match {
             case true => Future.successful(LoginResponse(false,None))
             case false =>

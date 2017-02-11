@@ -19,7 +19,7 @@ libraryDependencies ++= {
            "com.typesafe.play" % "play-json_2.12" % "2.6.0-M1",
            "ch.qos.logback" % "logback-classic" % "1.1.10",
            "com.jason-goodwin" %% "authentikat-jwt" % "0.4.5",
-           "com.github.etaty" %% "rediscala" % "1.8.0"
+           "net.debasishg" %% "redisclient" % "3.3"
        )
 }
 

@@ -24,5 +24,4 @@ object AkkaHttpServer extends App with Router {
     
     logger.info(s"server is up and listening to port ${config.getInt("http.port")}")
     RedisClientImpl.init
-    
 }

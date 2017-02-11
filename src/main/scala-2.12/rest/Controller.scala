@@ -1,6 +1,5 @@
 package rest
 
-import akka.http.scaladsl.model.{HttpEntity, _}
 import api.Error
 import service.{LoginService, Service}
 

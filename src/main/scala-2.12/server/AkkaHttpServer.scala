@@ -23,5 +23,8 @@ object AkkaHttpServer extends App with Router {
     Http().bindAndHandle(routes, config.getString("http.interface"), config.getInt("http.port"))
     
     logger.info(s"server is up and listening to port ${config.getInt("http.port")}")
-    RedisClientImpl.init
+    RedisClientImpl.init.map{
+        case true => logger.info("redis initialized")
+        case false => logger.info("redis ping failed")
+    }
 }
